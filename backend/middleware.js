@@ -3,7 +3,7 @@ const { JWT_SECETE } = require("./config");
 
 function authorize(req, res, next) {
 
-    try {
+   
         let token = req.headers.authorization;
         if (!token || !token.startsWith("Bearer ")) {
             return res
@@ -13,6 +13,7 @@ function authorize(req, res, next) {
                 })
         }
 
+
         token = token.split(" ")[1];
 
         const user = jwt.verify(token, JWT_SECETE);
@@ -21,16 +22,13 @@ function authorize(req, res, next) {
             req.userID = user.userID
             next();
 
-        }else{
+        } else {
             return res.status(401).json({})
         }
-        console.log(user);
-    } catch (error) {
-            console.log(error);
-            return res.status(401).json({});
-    }
+       
+    
 
-} 
+}
 
 
-module.exports=authorize;
+module.exports = authorize;

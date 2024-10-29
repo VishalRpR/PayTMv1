@@ -1,16 +1,21 @@
-const {default: mongoose } = require("mongoose");
+const { default: mongoose } = require("mongoose");
 const { MONGOOSE_URI } = require("./config");
 
 
 
-async function dbconnect (){
+async function dbconnect() {
     await mongoose.connect(MONGOOSE_URI);
     console.log("DB connected")
 }
 
 const userSchema = mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        required:true
+    },
+    lastname: {
+        type: String,
+        required: true
     },
     email: {
         type: String,
@@ -22,9 +27,27 @@ const userSchema = mongoose.Schema({
     }
 })
 
+
+
+
+const accountSchema = mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        require: true,
+        ref: "User"
+    },
+    balance: {
+        type: Number,
+        require: true
+    }
+})
+
+const Account = mongoose.model("Account", accountSchema)
+
 const User = mongoose.model("User", userSchema)
 
-module.exports={
+module.exports = {
     dbconnect,
-    User
+    User,
+    Account
 }
