@@ -3,12 +3,32 @@ const express = require("express");
 const { default: mongoose } = require("mongoose");
 const { Account } = require("../../db");
 const authorize = require("../../middleware");
+const { number } = require("zod");
 const accountrouter = express.Router();
 
 
 
-// accountrouter.get("/", getdetails);
+accountrouter.get("/balance",authorize, getdetails);
 accountrouter.post("/transaction", authorize, sendmoney);
+
+
+async function getdetails(req,res){
+
+    try {
+
+        const details=await Account.findOne({user:req.userID});
+        console.log(details)
+        const money = (details.balance / 100).toFixed(2);
+        return res.json({
+            message:`your account balance is ${money}`
+        })
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(411).json({})
+    }
+
+}
 async function sendmoney(req, res) {
     const amount = req.body.amount;
     const from = req.userID;
