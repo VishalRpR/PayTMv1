@@ -12,22 +12,51 @@ userrouter.post("/signup", signup);
 userrouter.post("/signin", signin);
 userrouter.get("/bulk", authorize, bulkget);
 userrouter.put('/', authorize, updateuser);
+userrouter.get('/', authorize, getuser);
+
+async function getuser(req,res){
+try {
+    const response=await User.findOne({
+        _id:req.userID
+    })
+
+    return res.json({
+
+        message:"user",
+        data:response})
+} catch (error) {
+    
+}
+}
 
 
 async function signin(req, res) {
     try {
-        const response = await User.find({
+        
+        const response = await User.findOne({
             email: req.body.email,
             password: req.body.password
         })
-        const ID = response._id;
-        const token = jwt.sign({ userID: ID }, JWT_SECETE);
+        console.log(response)
+      
+        if(response){
+            const ID = response._id;
+            console.log(ID)
+            const token = jwt.sign({ userID: ID }, JWT_SECETE);
+            return res.json({
+                message: "signin Successful",
+                data: token
+            })
+        }else{
+            console.log("calling")
+            return res.status(411).json({
+                message:"invalid email/password"
+            })
+        }
+       
 
 
-        return res.json({
-            message: "signin Successful",
-            data: token
-        })
+       
 
 
     } catch (error) {

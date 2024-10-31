@@ -7,7 +7,7 @@ import Signin from "./pages/Signin"
 function App() {
 
   return (
-    <div>
+    <div className="bg-black">
       <BrowserRouter>
 
         <Routes>

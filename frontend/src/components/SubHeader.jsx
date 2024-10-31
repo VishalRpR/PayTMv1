@@ -1,9 +1,9 @@
 import React from 'react'
 
-const SubHeader = ({lable}) => {
+const SubHeader = ({ lable }) => {
   return (
     <div className='text-xl text-slate-400'>
-          {lable}
+      {lable}
     </div>
   )
 }
