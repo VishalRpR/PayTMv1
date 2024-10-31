@@ -21,7 +21,7 @@ const Dashboard = () => {
 
 
       });
-      console.log(response.data)
+      
       SetContent(response.data.user)
 
     }
@@ -35,7 +35,7 @@ const Dashboard = () => {
 
   const token = useMemo(() => {
     const token = localStorage.getItem("token");
-    console.log(token)
+
     return token
   }, [])
 

@@ -17,7 +17,8 @@ async function getdetails(req,res){
     try {
 
         const details=await Account.findOne({user:req.userID});
-        console.log(details)
+       
+        
         const money = (details.balance / 100).toFixed(2);
         return res.json({
             message:`your account balance is ${money}`

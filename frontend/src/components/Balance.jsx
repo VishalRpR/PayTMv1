@@ -9,7 +9,7 @@ const Balance = ({ token }) => {
 
     async function setbalance() {
 
-      console.log({ token }.token)
+     
 
       const response = await axios.get("http://localhost:4003/api/v1/account/balance", {
 

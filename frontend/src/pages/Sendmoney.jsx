@@ -3,7 +3,7 @@ import MainHeader from '../components/MainHeader'
 import SubHeader from '../components/SubHeader'
 import InputText from '../components/InputText'
 import Button from '../components/Button'
-import TextLink from '../components/TextLink'
+
 import axios from 'axios'
 import { useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast'
@@ -38,7 +38,7 @@ const Sendmoney = () => {
               onClick={async () => {
                 try {
                   const token = localStorage.getItem("token");
-                  console.log({ userId })
+                 
                   const response = await axios.post("http://localhost:4003/api/v1/account/transaction", {
                     to: userId,
                     amount: amount

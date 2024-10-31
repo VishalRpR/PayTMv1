@@ -37,18 +37,21 @@ async function signin(req, res) {
             email: req.body.email,
             password: req.body.password
         })
-        console.log(response)
+      
+        
       
         if(response){
             const ID = response._id;
-            console.log(ID)
+           
+            
             const token = jwt.sign({ userID: ID }, JWT_SECETE);
             return res.json({
                 message: "signin Successful",
                 data: token
             })
         }else{
-            console.log("calling")
+          
+            
             return res.status(411).json({
                 message:"invalid email/password"
             })
@@ -196,7 +199,10 @@ async function signup(req, res) {
                balance:10000
         })
 
-        console.log(balance)
+       
+        
+
+
         const ID = user._id
 
         const token = jwt.sign({ userID: ID }, JWT_SECETE)
